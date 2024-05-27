@@ -85,7 +85,7 @@ const storeMedia = async (msg, fileId, mediaType, caption = '') => {
     try {
       await media.save();
 
-      const deepLink = `http://t.me/${bot.options.username}?start=${uniqueId}`;
+      const deepLink = `http://t.me/SuyeieyenotBot?start=${uniqueId}`;
       bot.sendMessage(chatId, `${mediaType} stored! Access it via: ${deepLink}`);
     } catch (error) {
       console.error('Error storing media:', error);
@@ -171,4 +171,12 @@ bot.on('callback_query', (callbackQuery) => {
   if (callbackQuery.data === 'close') {
     bot.deleteMessage(msg.chat.id, msg.message_id);
   }
+});
+
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
 });
