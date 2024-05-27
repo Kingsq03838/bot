@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
+const keep_alive = require('./keep_alive.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -170,12 +171,4 @@ bot.on('callback_query', (callbackQuery) => {
   if (callbackQuery.data === 'close') {
     bot.deleteMessage(msg.chat.id, msg.message_id);
   }
-});
-
-app.get('/', (req, res) => {
-  res.send('Server is running');
-});
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
 });
